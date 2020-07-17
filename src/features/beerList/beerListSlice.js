@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { dummyList } from '../../utils/dummyApi';
+
 export const counterSlice = createSlice({
     name: 'beerList',
     initialState: {
-        beerList: [],
+        beerList: dummyList,
         beerFilter: [],
         isFetching: false,
         errorMessage: '',
