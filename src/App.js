@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import BeerList from './features/beerList/BeerList';
 import BeerDetails from './features/beerDetails/BeerDetails';
 import Footer from './features/footer/Footer';
@@ -39,9 +38,12 @@ const App = () => {
                         className={classes.main}
                         maxWidth="lg"
                     >
-                        <BeerList />
-                        <br />
-                        <BeerDetails />
+                        <Switch>
+                            <Route path="/list" component={BeerList} />
+                            <Route path="/beer/:id" component={BeerDetails} />
+                            <Route path="/beer" component={BeerDetails} />
+                            <Redirect to="/list" />
+                        </Switch>
                     </Container>
                     <Footer />
                 </div>
