@@ -4,23 +4,10 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        //
-    },
-    footer: {
-        padding: theme.spacing(3, 2),
-        marginTop: 'auto',
-        backgroundColor:
-          theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
-    },
-}));
-
-const Footer = () => {
-    const classes = useStyles();
-
+const Footer = ({ classes }) => {
     return (
         <footer className={classes.footer}>
             <Container maxWidth="sm">
@@ -38,4 +25,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default withStyles(styles)(Footer);

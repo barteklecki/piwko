@@ -10,39 +10,10 @@ import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-        padding: theme.spacing(2),
-    },
-    details: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    content: {
-        flex: '0 1 auto',
-    },
-    cover: {
-        width: 151,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'auto 100%',
-    },
-    controls: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingLeft: theme.spacing(1),
-        paddingBottom: theme.spacing(1),
-    },
-    playIcon: {
-        height: 38,
-        width: 38,
-    },
-}));
-
-const Beer = () => {
-    const classes = useStyles();
+const Beer = ({classes}) => {
 
     return (
         <Card className={classes.root}>
@@ -77,4 +48,4 @@ const Beer = () => {
     );
 };
 
-export default Beer;
+export default withStyles(styles)(Beer);

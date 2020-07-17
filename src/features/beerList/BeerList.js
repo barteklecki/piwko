@@ -3,27 +3,14 @@ import React from 'react';
 import BeerFilter from './beerFilter/BeerFilter';
 import Beer from './beer/Beer';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gridGap: '1rem',
-        gridAutoRows: 'minmax(300px, auto)',
-        gridAutoColumns: 'minmax(300px, auto)', 
-    },
-    filters: {
-        gridColumn: 'first / end',
-    },
-}));
-
-const BeerList = () => {
-    const classes = useStyles();
+const BeerList = ({classes}) => {
 
     return (
         <div className={classes.root}>
-            <BeerFilter  className={classes.root} />
+            <BeerFilter  className={classes.filters} />
             <Beer />
             <Beer />
             <Beer />
@@ -39,4 +26,4 @@ const BeerList = () => {
     );
 };
 
-export default BeerList;
+export default withStyles(styles)(BeerList);

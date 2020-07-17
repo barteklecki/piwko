@@ -1,15 +1,9 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        //
-    },
-}));
-
-const BeerFilter = () => {
-    const classes = useStyles();
+const BeerFilter = ({ classes }) => {
 
     return (
         <div className={classes.root}>
@@ -18,4 +12,4 @@ const BeerFilter = () => {
     );
 };
 
-export default BeerFilter;
+export default withStyles(styles)(BeerFilter);
