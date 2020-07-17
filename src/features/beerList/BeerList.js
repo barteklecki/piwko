@@ -13,7 +13,7 @@ const BeerList = ({classes}) => {
     console.log(beerList);
 
     const beers = beerList.map( beer => 
-        <Beer record={beer} key={beer.id} />
+        <Beer beer={beer} key={beer.id} />
     );
 
     return (
