@@ -24,7 +24,7 @@ const Beer = ({classes, beer}) => {
                     {beer.tagline}
                 </Typography>
                 <Typography variant="body2" component="p">
-                    {beer.first_brewed}
+                    First brewed: {beer.first_brewed}
                 </Typography>
                 <CardActions>
                     <IconButton aria-label="add to favorites">
