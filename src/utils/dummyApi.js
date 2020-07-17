@@ -1,6 +1,6 @@
 // https://api.punkapi.com/v2/beers?page=1&per_page=12
 
-export default dummyList = [
+export const dummyList = [
     {
         id: 1,
         name: 'Buzz',

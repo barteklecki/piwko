@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectBeerList } from './beerListSlice';
 
 import BeerFilter from './beerFilter/BeerFilter';
 import Beer from './beer/Beer';
@@ -7,20 +9,17 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
 const BeerList = ({classes}) => {
+    const beerList = useSelector(selectBeerList);
+    console.log(beerList);
+
+    const beers = beerList.map( beer => 
+        <Beer record={beer} key={beer.id} />
+    );
 
     return (
         <div className={classes.root}>
             <BeerFilter />
-            <Beer />
-            <Beer />
-            <Beer />
-            <Beer />
-            <Beer />
-            <Beer />
-            <Beer />
-            <Beer />
-            <Beer />
-            <Beer />
+            {beers}
         </div>
     );
 };
