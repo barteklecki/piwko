@@ -30,6 +30,8 @@ export const { fetchBeerList, resetBeerList, setSelectedBeer, setFetchingFlag } 
 
 export const selectBeerList = state => state.beerList.beerList;
 
-export const selectBeer = state => state.beerList.beerList.filter( beer => beer.id === state.beerList.selectedBeer );
-
+export const selectBeer = state => {
+    const beer = state.beerList.beerList.filter( beer => beer.id === state.beerList.selectedBeer );
+    return beer.length ? beer : null;
+}
 export default beerListSlice.reducer;
