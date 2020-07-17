@@ -7,6 +7,9 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './app/theme';
+
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 
@@ -32,28 +35,30 @@ const App = () => {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <Container component="main" className={classes.main} maxWidth="sm">
-                <Typography variant="h2" component="h1" gutterBottom>
-                Piwko - search for your favorite beer flavor!
-                </Typography>
-                <BeerList />
-            </Container>
-            <footer className={classes.footer}>
-                <Container maxWidth="sm">
-                <Typography variant="body1">
-                    Based on PUNK Api
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                    {'Copyright © '}
-                    <Link color="inherit" href="https://github.com/barteklecki/">
-                        GH/barteklecki
-                    </Link>{' 2020.'}
-                </Typography>
+        <ThemeProvider theme={theme}>
+            <div className={classes.root}>
+                <CssBaseline />
+                <Container component="main" className={classes.main} maxWidth="sm">
+                    <Typography variant="h2" component="h1" gutterBottom>
+                    Piwko - search for your favorite beer flavor!
+                    </Typography>
+                    <BeerList />
                 </Container>
-            </footer>
-        </div>
+                <footer className={classes.footer}>
+                    <Container maxWidth="sm">
+                    <Typography variant="body1">
+                        Based on PUNK Api
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                        {'Copyright © '}
+                        <Link color="inherit" href="https://github.com/barteklecki/">
+                            GH/barteklecki
+                        </Link>{' 2020.'}
+                    </Typography>
+                    </Container>
+                </footer>
+            </div>
+        </ThemeProvider>
     );
 }
 
