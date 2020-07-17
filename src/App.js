@@ -11,7 +11,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './app/theme';
 
 import { makeStyles } from '@material-ui/core/styles';
-import './App.css'; 
+import './App.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,9 +32,9 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
                 <CssBaseline />
-                <Container component="main" className={classes.main} maxWidth="sm">
+                <Container component="main" className={classes.main} maxWidth="lg">
                     <Typography variant="h2" component="h1" gutterBottom>
-                    Piwko - search for your favorite beer flavor!
+                        Piwko - search for your favorite beer flavor!
                     </Typography>
                     <BeerList />
                 </Container>
