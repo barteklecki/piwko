@@ -6,9 +6,8 @@ export const beerListSlice = createSlice({
     name: 'beerList',
     initialState: {
         beerList: dummyList,
-        beerFilter: [],
+        selectedBeer: null,
         isFetching: false,
-        errorMessage: '',
     },
     reducers: {
         fetchBeerList: state => {
@@ -18,25 +17,19 @@ export const beerListSlice = createSlice({
         resetBeerList: state => {
             state.beerList = [];
         },
-        setBeerFilter: state => {
-            //
-        },
-        resetBeerFilter: state => {
-            state.beerFilter = [];
+        setSelectedBeer: (state, action) => {
+            state.selectedBeer = +action.payload;
         },
         setFetchingFlag: state => {
             state.isFetching = true;
         },
-        setErrorMessage: state => {
-            //
-        },
     },
 });
 
-export const { fetchBeerList, resetBeerList, setBeerFilter, resetBeerFilter, setFetchingFlag, setErrorMessage } = beerListSlice.actions;
+export const { fetchBeerList, resetBeerList, setSelectedBeer, setFetchingFlag } = beerListSlice.actions;
 
 export const selectBeerList = state => state.beerList.beerList;
-export const selectBeerFilter = state => state.beerList.beerFilter;
-export const selectFetchingFlag = state => state.beerList.isFetching;
+
+export const selectBeer = state => state.beerList.beerList.filter( beer => beer.id === state.beerList.selectedBeer );
 
 export default beerListSlice.reducer;

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectBeer, setSelectedBeer } from '../beerList/beerListSlice';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,7 +15,20 @@ import ShareIcon from '@material-ui/icons/Share';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-const BeerDetails = ({ classes }) => {
+const BeerDetails = ({ classes, match }) => {
+    const { params: { id } } = match;
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if(id) {
+            dispatch(setSelectedBeer(id));
+        }
+
+    }, [dispatch, id]);
+
+    const beer = useSelector(selectBeer);
+    console.log(beer);
+
 
     return (
         <Card className={classes.root}>
