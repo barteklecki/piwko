@@ -6,7 +6,7 @@ import styles from './styles';
 const BeerFilter = ({ classes }) => {
 
     return (
-        <div className={classes.root}>
+        <div  className={classes.filters} >
             [ Beer Filter ]
         </div>
     );

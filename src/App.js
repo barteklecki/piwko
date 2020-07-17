@@ -34,9 +34,6 @@ const App = () => {
             <div className={classes.root}>
                 <CssBaseline />
                 <Container component="main" className={classes.main} maxWidth="lg">
-                    <Typography variant="h2" component="h1" gutterBottom>
-                        Piwko - search for your favorite beer flavor!
-                    </Typography>
                     <BeerList />
                     <br/>
                     <BeerDetails />

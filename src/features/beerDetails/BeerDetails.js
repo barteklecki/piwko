@@ -13,7 +13,6 @@ import ShareIcon from '@material-ui/icons/Share';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-
 const BeerDetails = ({ classes }) => {
 
     return (

@@ -10,7 +10,7 @@ const BeerList = ({classes}) => {
 
     return (
         <div className={classes.root}>
-            <BeerFilter  className={classes.filters} />
+            <BeerFilter/>
             <Beer />
             <Beer />
             <Beer />
