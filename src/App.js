@@ -1,8 +1,10 @@
 import React from 'react';
 
+import BeerList from './features/beerList/BeerList';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,13 +36,9 @@ const App = () => {
             <CssBaseline />
             <Container component="main" className={classes.main} maxWidth="sm">
                 <Typography variant="h2" component="h1" gutterBottom>
-                Piwko! - search your favourite beer flower
+                Piwko - search for your favorite beer flavor!
                 </Typography>
-                <Typography variant="h5" component="h2" gutterBottom>
-                {'Search your favourite beer flower'}
-                {'Use search input:'}
-                </Typography>
-                <Typography variant="body1">info</Typography>
+                <BeerList />
             </Container>
             <footer className={classes.footer}>
                 <Container maxWidth="sm">
