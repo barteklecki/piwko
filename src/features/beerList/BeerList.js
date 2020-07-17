@@ -1,5 +1,7 @@
 import React from 'react';
-import BeerFilter from '../beerFilter/BeerFilter';
+
+import BeerFilter from './beerFilter/BeerFilter';
+import Beer from './beer/Beer';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -15,7 +17,7 @@ const BeerList = () => {
     return (
         <div className={classes.root}>
             <BeerFilter />
-            [ Beer List ]
+            <Beer />
         </div>
     );
 };
