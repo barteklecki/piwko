@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BeerList from './features/beerList/BeerList';
+import BeerDetails from './features/beerDetails/BeerDetails';
 import Footer from './features/footer/Footer';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -37,6 +38,8 @@ const App = () => {
                         Piwko - search for your favorite beer flavor!
                     </Typography>
                     <BeerList />
+                    <br/>
+                    <BeerDetails />
                 </Container>
                 <Footer />
             </div>
