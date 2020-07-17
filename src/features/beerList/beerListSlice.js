@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { dummyList } from '../../utils/dummyApi';
 
-export const beerList = createSlice({
+export const beerListSlice = createSlice({
     name: 'beerList',
     initialState: {
-        beerList: [{id: 1}, {id: 2}, {id: 3}],
+        beerList: dummyList,
         beerFilter: [],
         isFetching: false,
         errorMessage: '',
@@ -33,10 +33,10 @@ export const beerList = createSlice({
     },
 });
 
-export const { fetchBeerList, resetBeerList, setBeerFilter, resetBeerFilter, setFetchingFlag, setErrorMessage } = beerList.actions;
+export const { fetchBeerList, resetBeerList, setBeerFilter, resetBeerFilter, setFetchingFlag, setErrorMessage } = beerListSlice.actions;
 
-export const selectBeerList = state => state.beerList;
-export const selectBeerFilter = state => state.beerFilter;
-export const selectFetchingFlag = state => state.isFetching;
+export const selectBeerList = state => state.beerList.beerList;
+export const selectBeerFilter = state => state.beerList.beerFilter;
+export const selectFetchingFlag = state => state.beerList.isFetching;
 
-export default beerList.reducer;
+export default beerListSlice.reducer;
