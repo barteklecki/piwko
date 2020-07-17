@@ -12,13 +12,14 @@ export const counterSlice = createSlice({
     },
     reducers: {
         fetchBeerList: state => {
-            return state;
+            //
+            state.isFetching = false;
         },
         resetBeerList: state => {
             state.beerList = [];
         },
         setBeerFilter: state => {
-            return state;
+            //
         },
         resetBeerFilter: state => {
             state.beerFilter = [];
@@ -27,7 +28,7 @@ export const counterSlice = createSlice({
             state.isFetching = true;
         },
         setErrorMessage: state => {
-            return state;
+            //
         },
     },
 });
