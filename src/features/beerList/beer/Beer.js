@@ -1,4 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { addToFavorites } from '../beerListSlice';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,29 +16,41 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
 const Beer = ({classes, beer}) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const clickBeerHandler = () => {
+        history.push(`beer/${beer.id}`);
+    };
 
     return (
-        <Card className={classes.root}>
-            <CardContent>
-                <Typography variant="h5" component="h2">
-                    {beer.name}
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                    {beer.tagline}
-                </Typography>
-                <Typography variant="body2" component="p">
-                    First brewed: {beer.first_brewed}
-                </Typography>
+        <Card className={classes.root} >
+            <CardContent className={classes.content}>
+                <div onClick={clickBeerHandler}>
+                    <Typography variant="h5" component="h2">
+                        {beer.name}
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                        {beer.tagline}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        First brewed: {beer.first_brewed}
+                    </Typography>
+                </div>
                 <CardActions>
-                    <IconButton aria-label="add to favorites">
+                    <IconButton
+                        aria-label="add to favorites"
+                        onClick={ () => dispatch(addToFavorites(beer.id))}
+                    >
                         <FavoriteIcon />
                     </IconButton>
                     <IconButton aria-label="share">
                         <ShareIcon />
                     </IconButton>
-                </CardActions>
+            </CardActions>
             </CardContent>
             <CardMedia
+                onClick={clickBeerHandler}
                 className={classes.cover}
                 image={beer.image_url}
                 title={beer.name}

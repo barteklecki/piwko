@@ -9,6 +9,8 @@ export default theme => ({
     },
     content: {
         flex: '0 1 auto',
+        flexDirection: 'column',
+        alignItems: 'space-between',
     },
     cover: {
         width: 151,
