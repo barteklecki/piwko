@@ -1,17 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { dummyList } from '../../utils/dummyApi';
+//import { dummyList } from '../../utils/dummyApi';
+import axios from 'axios';
 
 const setLocalStorage = (key, arr) =>
     window.localStorage.setItem(key, JSON.stringify(arr));
 const getLocalStorage = key => JSON.parse(window.localStorage.getItem(key));
 
+const itemsPerPage = 12;
+const API_URL='https://api.punkapi.com/v2/beers'; 
+
 export const beerListSlice = createSlice({
     name: 'beerList',
     initialState: {
-        beerList: dummyList,
+        //beerList: [dummyList],
+        beerList: [],
         favoriteList: getLocalStorage('favList') ?? [],
         selectedBeer: null,
         isFetching: false,
+        errorMessage: null,
     },
     reducers: {
         fetchBeerList: (state, action) => {
@@ -42,6 +48,10 @@ export const beerListSlice = createSlice({
 
             setLocalStorage('favList', state.favoriteList);
         },
+        errorMessage: (state, {payload}) => {
+            state.isFetching = false;
+            state.errorMessage = payload;
+        },
     },
 });
 
@@ -51,6 +61,7 @@ export const {
     setFetchingFlag,
     resetBeerList,
     toogleFavorite,
+    errorMessage,
 } = beerListSlice.actions;
 
 export const selectBeerList = state => state.beerList.beerList;
@@ -69,3 +80,17 @@ export const selectBeerById = (state, id) => {
 };
 
 export default beerListSlice.reducer;
+
+export const fetchPageFromApi = state => async dispatch => {
+    dispatch(setFetchingFlag());
+    try {
+        let pageNum = Math.floor(state.beerList.lenght / itemsPerPage) + 1;
+        const response = await axios.get(`${API_URL}?page=${pageNum}&per_page=${itemsPerPage}`);
+        console.log('response:', response);
+        state.beerlist.concat(response);
+        state.isFetching = false;
+    } catch (error) {
+        dispatch(errorMessage(error));
+        console.log(error);
+    }
+}

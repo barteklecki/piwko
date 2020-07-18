@@ -43,11 +43,7 @@ const Beer = ({ classes, beer, fav }) => {
                         aria-label="add to favorites"
                         onClick={() => dispatch(toogleFavorite(beer.id))}
                     >
-                        {fav === true ? (
-                            <FavoriteIcon color="secondary" />
-                        ) : (
-                            <FavoriteBorderIcon />
-                        )}
+                        {fav === true ? <FavoriteIcon color="secondary" /> : <FavoriteBorderIcon />}
                     </IconButton>
                     <IconButton aria-label="share">
                         <ShareIcon />
