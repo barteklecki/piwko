@@ -28,7 +28,15 @@ export const beerListSlice = createSlice({
             state.beerList = [];
         },
         toogleFavorite: (state, action) => {
-            console.log('FAV:', action.payload);
+            const id = action.payload;
+            const index = state.favoriteList.indexOf(id);
+            console.log('FAV:', id);
+
+            if (index === -1) {
+                state.favoriteList.push(id);
+            } else {
+                state.favoriteList.splice(index, 1);
+            }
         },
     },
 });
