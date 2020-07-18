@@ -24,7 +24,7 @@ export default theme => ({
         textAlign: 'left',
         margin: '1rem',
     },
-    rating: {
+    chips: {
         display: 'flex',
         alignSelf: 'center',
         justifyContent: 'center',

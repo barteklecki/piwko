@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectBeer, setSelectedBeer } from '../beerList/beerListSlice';
+import { selectBeerList } from '../beerList/beerListSlice';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -16,21 +17,17 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
 const BeerDetails = ({ classes, match }) => {
+    const beers = useSelector(selectBeerList);
+    const dispatch = useDispatch();
     const { params: { id } } = match;
 
-    const dispatch = useDispatch();
-    useEffect(() => {
-        if(id) {
-            dispatch(setSelectedBeer(id));
-        }
+    if (!beers) {
+        return <Redirect to="/" />;
+    }
 
-    }, [dispatch, id]);
+    const beer = beers.find( beer => +beer.id === +id);
 
-    const beer = useSelector(selectBeer);
-    console.log(beer);
-
-
-    return (
+    const beerDetails =
         <Card className={classes.root}>
             <CardContent className={classes.summary}>
                 <Typography
@@ -39,14 +36,14 @@ const BeerDetails = ({ classes, match }) => {
                     variant="h4"
                     aria-label="title"
                 >
-                    Punk IPA 2007 - 2010
+                    {beer.name}
                 </Typography>
                 <Typography
                     variant="subtitle1"
                     color="textSecondary"
                     aria-label="tagline"
                 >
-                    Post Modern Classic. Spiky. Tropical. Hoppy.
+                    {beer.tagline}
                 </Typography>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
@@ -54,14 +51,28 @@ const BeerDetails = ({ classes, match }) => {
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>
-                <div className={classes.rating}>
+                <div className={classes.chips}>
                     <Chip
-                        label={82.14}
+                        label={`ABV: ${beer.abv}`}
+                        color="primary"
+                    />
+                    <Chip
+                        label={`IBU: ${beer.ibu}`}
+                        color="primary"
+                    />
+                    <Chip
+                        label={`EBC: ${beer.ebc}`}
+                        color="primary"
+                    />
+                </div>
+                <div className={classes.chips}>
+                    <Chip
+                        label={`SRM: ${beer.srm}`}
                         color="secondary"
                     />
                     <Chip
-                        label={6.0}
-                        color="primary"
+                        label={`pH: ${beer.ph}`}
+                        color="secondary"
                     />
                 </div>
                 <Typography
@@ -70,7 +81,7 @@ const BeerDetails = ({ classes, match }) => {
                     color="textSecondary"
                     aria-label="genere"
                 >
-                    first_brewed: 04/2007
+                    first brewed: {beer.first_brewed}
                 </Typography>
                 <Divider className={classes.text} variant="middle" />
                 <Typography
@@ -78,13 +89,16 @@ const BeerDetails = ({ classes, match }) => {
                     variant="subtitle1"
                     color="textSecondary"
                 >
-                    attenuation_level: 82.14
+                    <p>attenuation level: {beer.attenuation_level}</p>
+                    <p>volume: {`${beer.volume.value} ${beer.volume.unit}`}</p>
+                    <p>boil volume: {`${beer.boil_volume.value} ${beer.boil_volume.unit}`}</p>
+
                 </Typography>
             </CardContent>
             <CardMedia
                 className={classes.cover}
-                image="https://images.punkapi.com/v2/192.png"
-                title="Punk IPA 2007 - 2010"
+                image={beer.image_url}
+                title={beer.name}
             />
             <CardContent className={classes.content}>
                 <Typography
@@ -92,11 +106,12 @@ const BeerDetails = ({ classes, match }) => {
                     color="textSecondary"
                     component="div"
                 >
-                    description": "Our flagship beer that kick started the craft beer revolution. This is James and Martin's original take on an American IPA, subverted with punchy New Zealand hops. Layered with new world hops to create an all-out riot of grapefruit, pineapple and lychee before a spiky, mouth-puckering bitter finish.
+                    {beer.description}
                 </Typography>
             </CardContent>
         </Card>
-    );
+
+    return beerDetails;
 };
 
 export default withStyles(styles)(BeerDetails);
