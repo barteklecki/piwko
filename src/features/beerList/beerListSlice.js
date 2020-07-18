@@ -6,6 +6,7 @@ export const beerListSlice = createSlice({
     name: 'beerList',
     initialState: {
         beerList: dummyList,
+        favoriteList: [],
         selectedBeer: null,
         isFetching: false,
     },
@@ -20,19 +21,19 @@ export const beerListSlice = createSlice({
             console.log('fetchBeer:', action.payload);
             state.isFetching = false;
         },
+        setFetchingFlag: state => {
+            state.isFetching = true;
+        },
         resetBeerList: state => {
             state.beerList = [];
         },
-        setSelectedBeer: (state, action) => {
-            state.selectedBeer = +action.payload;
-        },
-        setFetchingFlag: state => {
-            state.isFetching = true;
+        toogleFavorite: (state, action) => {
+            console.log('FAV:', action.payload);
         },
     },
 });
 
-export const { fetchBeerList, fetchBeer, resetBeerList, setSelectedBeer, setFetchingFlag } = beerListSlice.actions;
+export const { fetchBeerList, fetchBeer, setFetchingFlag, resetBeerList, toogleFavorite } = beerListSlice.actions;
 
 export const selectBeerList = state => state.beerList.beerList;
 
