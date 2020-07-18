@@ -21,7 +21,7 @@ export const beerListSlice = createSlice({
         fetchBeerListSuccess: (state, action) => {
             state.beerList = state.beerList.concat(action.payload);
             state.isFetching = false;
-            state.errorMessage = '';
+            state.errorMessage = null;
         },
         fetchBeer: (state, action) => {
             //
