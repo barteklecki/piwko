@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-//import { dummyList } from '../../utils/dummyApi';
 import axios from 'axios';
 
 const setLocalStorage = (key, arr) =>
@@ -7,12 +6,11 @@ const setLocalStorage = (key, arr) =>
 const getLocalStorage = key => JSON.parse(window.localStorage.getItem(key));
 
 const itemsPerPage = 12;
-const API_URL='https://api.punkapi.com/v2/beers'; 
+const API_URL = 'https://api.punkapi.com/v2/beers';
 
 export const beerListSlice = createSlice({
     name: 'beerList',
     initialState: {
-        //beerList: [dummyList],
         beerList: [],
         favoriteList: getLocalStorage('favList') ?? [],
         selectedBeer: null,
@@ -20,10 +18,10 @@ export const beerListSlice = createSlice({
         errorMessage: null,
     },
     reducers: {
-        fetchBeerList: (state, action) => {
-            //
-            console.log('fetchBeerList:', action.payload);
+        fetchBeerListSuccess: (state, action) => {
+            state.beerList = state.beerList.concat(action.payload);
             state.isFetching = false;
+            state.errorMessage = '';
         },
         fetchBeer: (state, action) => {
             //
@@ -48,7 +46,7 @@ export const beerListSlice = createSlice({
 
             setLocalStorage('favList', state.favoriteList);
         },
-        errorMessage: (state, {payload}) => {
+        errorMessage: (state, { payload }) => {
             state.isFetching = false;
             state.errorMessage = payload;
         },
@@ -56,7 +54,7 @@ export const beerListSlice = createSlice({
 });
 
 export const {
-    fetchBeerList,
+    fetchBeerListSuccess,
     fetchBeer,
     setFetchingFlag,
     resetBeerList,
@@ -81,16 +79,16 @@ export const selectBeerById = (state, id) => {
 
 export default beerListSlice.reducer;
 
-export const fetchPageFromApi = state => async dispatch => {
+export const fetchPageFromApi = () => async dispatch => {
+    let pageNum = Math.floor(0 / itemsPerPage) + 1;
     dispatch(setFetchingFlag());
     try {
-        let pageNum = Math.floor(state.beerList.lenght / itemsPerPage) + 1;
-        const response = await axios.get(`${API_URL}?page=${pageNum}&per_page=${itemsPerPage}`);
-        console.log('response:', response);
-        state.beerlist.concat(response);
-        state.isFetching = false;
+        const url = `${API_URL}?page=${pageNum}&per_page=${itemsPerPage}`;
+        const response = await axios.get(url);
+        const data = response.data;
+        dispatch(fetchBeerListSuccess(data));
     } catch (error) {
         dispatch(errorMessage(error));
         console.log(error);
     }
-}
+};
