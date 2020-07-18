@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectBeerList } from '../beerList/beerListSlice';
+import { selectBeerList, selectFavoriteList, toogleFavorite } from '../beerList/beerListSlice';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
 import IconButton from '@material-ui/core/IconButton';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 
@@ -18,6 +19,7 @@ import styles from './styles';
 
 const BeerDetails = ({ classes, match }) => {
     const beers = useSelector(selectBeerList);
+    const favoriteList = useSelector(selectFavoriteList);
     const dispatch = useDispatch();
     const { params: { id } } = match;
 
@@ -26,6 +28,7 @@ const BeerDetails = ({ classes, match }) => {
     }
 
     const beer = beers.find( beer => +beer.id === +id);
+    const isFav = favoriteList.includes(beer.id);
 
     const beerDetails =
         <Card className={classes.root}>
@@ -45,8 +48,11 @@ const BeerDetails = ({ classes, match }) => {
                 >
                     {beer.tagline}
                 </Typography>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
+                <IconButton
+                    onClick={ () => dispatch(toogleFavorite(beer.id))}
+                    aria-label="add to favorites"
+                >
+                    {isFav === true ? <FavoriteIcon color="secondary"/> : <FavoriteBorderIcon />}
                 </IconButton>
                 <IconButton aria-label="share">
                     <ShareIcon />
