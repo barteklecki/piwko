@@ -24,17 +24,10 @@ const Beer = ({classes, beer, fav}) => {
         history.push(`beer/${beer.id}`);
     };
 
-    // const favIcon = () => {
-    //     if (fav) {
-    //         return <FavoriteBorderIcon />
-    //     }
-    //     return <FavoriteIcon />
-    // }
-
     return (
         <Card className={classes.root} >
             <CardContent className={classes.content}>
-                <div onClick={clickBeerHandler}>
+                <div onClick={clickBeerHandler} className={classes.details}>
                     <Typography variant="h5" component="h2">
                         {beer.name}
                     </Typography>

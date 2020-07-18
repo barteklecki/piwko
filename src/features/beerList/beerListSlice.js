@@ -8,7 +8,7 @@ export const beerListSlice = createSlice({
     name: 'beerList',
     initialState: {
         beerList: dummyList,
-        favoriteList: getLocalStorage('favList'),
+        favoriteList: getLocalStorage('favList') ?? [],
         selectedBeer: null,
         isFetching: false,
     },
