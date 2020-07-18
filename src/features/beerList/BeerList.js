@@ -8,17 +8,13 @@ import Beer from './beer/Beer';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-const BeerList = ({classes}) => {
+const BeerList = ({ classes }) => {
     const beerList = useSelector(selectBeerList);
-    const favoriteList = useSelector(selectFavoriteList)
+    const favoriteList = useSelector(selectFavoriteList);
 
-    const beers = beerList.map( beer =>
-        <Beer
-            key={beer.id}
-            beer={beer}
-            fav={favoriteList.includes(beer.id)}
-        />
-    );
+    const beers = beerList.map(beer => (
+        <Beer key={beer.id} beer={beer} fav={favoriteList.includes(beer.id)} />
+    ));
 
     return (
         <div className={classes.root}>

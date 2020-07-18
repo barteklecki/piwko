@@ -21,16 +21,18 @@ const BeerDetails = ({ classes, match }) => {
     const beers = useSelector(selectBeerList);
     const favoriteList = useSelector(selectFavoriteList);
     const dispatch = useDispatch();
-    const { params: { id } } = match;
+    const {
+        params: { id },
+    } = match;
 
     if (!beers) {
         return <Redirect to="/" />;
     }
 
-    const beer = beers.find( beer => +beer.id === +id);
+    const beer = beers.find(beer => +beer.id === +id);
     const isFav = favoriteList.includes(beer.id);
 
-    const beerDetails =
+    const beerDetails = (
         <Card className={classes.root}>
             <CardContent className={classes.summary}>
                 <Typography
@@ -49,37 +51,26 @@ const BeerDetails = ({ classes, match }) => {
                     {beer.tagline}
                 </Typography>
                 <IconButton
-                    onClick={ () => dispatch(toogleFavorite(beer.id))}
+                    onClick={() => dispatch(toogleFavorite(beer.id))}
                     aria-label="add to favorites"
                 >
-                    {isFav === true ? <FavoriteIcon color="secondary"/> : <FavoriteBorderIcon />}
+                    {isFav === true ? (
+                        <FavoriteIcon color="secondary" />
+                    ) : (
+                        <FavoriteBorderIcon />
+                    )}
                 </IconButton>
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>
                 <div className={classes.chips}>
-                    <Chip
-                        label={`ABV: ${beer.abv}`}
-                        color="primary"
-                    />
-                    <Chip
-                        label={`IBU: ${beer.ibu}`}
-                        color="primary"
-                    />
-                    <Chip
-                        label={`EBC: ${beer.ebc}`}
-                        color="primary"
-                    />
+                    <Chip label={`ABV: ${beer.abv}`} color="primary" />
+                    <Chip label={`IBU: ${beer.ibu}`} color="primary" />
+                    <Chip label={`EBC: ${beer.ebc}`} color="primary" />
                 </div>
                 <div className={classes.chips}>
-                    <Chip
-                        label={`SRM: ${beer.srm}`}
-                        color="secondary"
-                    />
-                    <Chip
-                        label={`pH: ${beer.ph}`}
-                        color="secondary"
-                    />
+                    <Chip label={`SRM: ${beer.srm}`} color="secondary" />
+                    <Chip label={`pH: ${beer.ph}`} color="secondary" />
                 </div>
                 <Typography
                     className={classes.text}
@@ -97,8 +88,10 @@ const BeerDetails = ({ classes, match }) => {
                 >
                     <p>attenuation level: {beer.attenuation_level}</p>
                     <p>volume: {`${beer.volume.value} ${beer.volume.unit}`}</p>
-                    <p>boil volume: {`${beer.boil_volume.value} ${beer.boil_volume.unit}`}</p>
-
+                    <p>
+                        boil volume:{' '}
+                        {`${beer.boil_volume.value} ${beer.boil_volume.unit}`}
+                    </p>
                 </Typography>
             </CardContent>
             <CardMedia
@@ -116,6 +109,7 @@ const BeerDetails = ({ classes, match }) => {
                 </Typography>
             </CardContent>
         </Card>
+    );
 
     return beerDetails;
 };

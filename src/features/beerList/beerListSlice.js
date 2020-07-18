@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { dummyList } from '../../utils/dummyApi';
 
-const setLocalStorage = (key, arr) => window.localStorage.setItem(key, JSON.stringify(arr));
+const setLocalStorage = (key, arr) =>
+    window.localStorage.setItem(key, JSON.stringify(arr));
 const getLocalStorage = key => JSON.parse(window.localStorage.getItem(key));
 
 export const beerListSlice = createSlice({
@@ -44,19 +45,27 @@ export const beerListSlice = createSlice({
     },
 });
 
-export const { fetchBeerList, fetchBeer, setFetchingFlag, resetBeerList, toogleFavorite } = beerListSlice.actions;
+export const {
+    fetchBeerList,
+    fetchBeer,
+    setFetchingFlag,
+    resetBeerList,
+    toogleFavorite,
+} = beerListSlice.actions;
 
 export const selectBeerList = state => state.beerList.beerList;
 export const selectFavoriteList = state => state.beerList.favoriteList;
 
 export const selectBeer = state => {
-    const beer = state.beerList.beerList.filter( beer => beer.id === state.beerList.selectedBeer );
+    const beer = state.beerList.beerList.filter(
+        beer => beer.id === state.beerList.selectedBeer
+    );
     return beer.length ? beer : null;
-}
+};
 
 export const selectBeerById = (state, id) => {
-    const beer = state.beerList.beerList.filter( beer => beer.id === id );
+    const beer = state.beerList.beerList.filter(beer => beer.id === id);
     return beer.length ? beer : null;
-}
+};
 
 export default beerListSlice.reducer;

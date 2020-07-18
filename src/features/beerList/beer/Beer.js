@@ -16,7 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-const Beer = ({classes, beer, fav}) => {
+const Beer = ({ classes, beer, fav }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -25,7 +25,7 @@ const Beer = ({classes, beer, fav}) => {
     };
 
     return (
-        <Card className={classes.root} >
+        <Card className={classes.root}>
             <CardContent className={classes.content}>
                 <div onClick={clickBeerHandler} className={classes.details}>
                     <Typography variant="h5" component="h2">
@@ -41,14 +41,18 @@ const Beer = ({classes, beer, fav}) => {
                 <CardActions>
                     <IconButton
                         aria-label="add to favorites"
-                        onClick={ () => dispatch(toogleFavorite(beer.id))}
+                        onClick={() => dispatch(toogleFavorite(beer.id))}
                     >
-                        {fav === true ? <FavoriteIcon color="secondary"/> : <FavoriteBorderIcon />}
+                        {fav === true ? (
+                            <FavoriteIcon color="secondary" />
+                        ) : (
+                            <FavoriteBorderIcon />
+                        )}
                     </IconButton>
                     <IconButton aria-label="share">
                         <ShareIcon />
                     </IconButton>
-            </CardActions>
+                </CardActions>
             </CardContent>
             <CardMedia
                 onClick={clickBeerHandler}
