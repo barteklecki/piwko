@@ -9,19 +9,27 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-const Beer = ({classes, beer}) => {
+const Beer = ({classes, beer, fav}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const clickBeerHandler = () => {
         history.push(`beer/${beer.id}`);
     };
+
+    // const favIcon = () => {
+    //     if (fav) {
+    //         return <FavoriteBorderIcon />
+    //     }
+    //     return <FavoriteIcon />
+    // }
 
     return (
         <Card className={classes.root} >
@@ -42,7 +50,7 @@ const Beer = ({classes, beer}) => {
                         aria-label="add to favorites"
                         onClick={ () => dispatch(toogleFavorite(beer.id))}
                     >
-                        <FavoriteIcon />
+                        {fav === true ? <FavoriteIcon color="secondary"/> : <FavoriteBorderIcon />}
                     </IconButton>
                     <IconButton aria-label="share">
                         <ShareIcon />

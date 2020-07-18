@@ -44,6 +44,7 @@ export const beerListSlice = createSlice({
 export const { fetchBeerList, fetchBeer, setFetchingFlag, resetBeerList, toogleFavorite } = beerListSlice.actions;
 
 export const selectBeerList = state => state.beerList.beerList;
+export const selectFavoriteList = state => state.beerList.favoriteList;
 
 export const selectBeer = state => {
     const beer = state.beerList.beerList.filter( beer => beer.id === state.beerList.selectedBeer );
