@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import { dummyList } from '../../utils/dummyApi';
+
+const setLocalStorage = (key, arr) => window.localStorage.setItem(key, JSON.stringify(arr));
+const getLocalStorage = key => JSON.parse(window.localStorage.getItem(key));
 
 export const beerListSlice = createSlice({
     name: 'beerList',
     initialState: {
         beerList: dummyList,
-        favoriteList: [],
+        favoriteList: getLocalStorage('favList'),
         selectedBeer: null,
         isFetching: false,
     },
@@ -30,13 +32,14 @@ export const beerListSlice = createSlice({
         toogleFavorite: (state, action) => {
             const id = action.payload;
             const index = state.favoriteList.indexOf(id);
-            console.log('FAV:', id);
 
             if (index === -1) {
                 state.favoriteList.push(id);
             } else {
                 state.favoriteList.splice(index, 1);
             }
+
+            setLocalStorage('favList', state.favoriteList);
         },
     },
 });
