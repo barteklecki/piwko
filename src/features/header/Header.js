@@ -9,14 +9,13 @@ import styles from './styles';
 
 const Header = ({ classes }) => {
     const history = useHistory();
-    const location = history.location?.pathname;
 
     return (
         <header  className={classes.header} >
             <Button 
                 onClick={() => history.push('/list')}
                 className={classes.button}
-                variant={location === '/list' ? 'contained' : 'outlined'}
+                variant="outlined"
             >
                 Beer Catalogue
             </Button>
@@ -24,7 +23,7 @@ const Header = ({ classes }) => {
             <Button 
                 onClick={() => history.push('/favourites')}
                 className={classes.button}
-                variant={location === '/favourites' ? 'contained' : 'outlined'}
+                variant="outlined"
             >
                 Favourite Beers
             </Button>

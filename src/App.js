@@ -5,6 +5,7 @@ import { fetchNextPage } from './features/beerList/beerListSlice';
 
 import Header from './features/header/Header';
 import BeerList from './features/beerList/BeerList';
+import FavouritesList from './features/favouritesList/FavouritesList';
 import BeerDetails from './features/beerDetails/BeerDetails';
 import Footer from './features/footer/Footer';
 
@@ -49,6 +50,7 @@ const App = () => {
                         <Header />
                         <Switch>
                             <Route path="/list" component={BeerList} />
+                            <Route path="/favourites" component={FavouritesList} />
                             <Route path="/beer/:id" component={BeerDetails} />
                             <Route path="/beer" component={BeerDetails} />
                             <Redirect to="/list" />
