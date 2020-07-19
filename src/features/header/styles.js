@@ -1,10 +1,8 @@
 export default theme => ({
-    root: {
-        //
-    },
-    filters: {
+    header: {
         display: 'flex',
-        gridColumn: '1 / -1',
+        minWidth: '300px',
+        margin: '1rem',
         alignItems: 'center',
         justifyContent: 'center',
     },

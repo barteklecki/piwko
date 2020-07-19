@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchNextPage } from './features/beerList/beerListSlice';
 
+import Header from './features/header/Header';
 import BeerList from './features/beerList/BeerList';
 import BeerDetails from './features/beerDetails/BeerDetails';
 import Footer from './features/footer/Footer';
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         minHeight: '100vh',
     },
     main: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
     },
 }));
@@ -46,6 +47,7 @@ const App = () => {
                         className={classes.main}
                         maxWidth="lg"
                     >
+                        <Header />
                         <Switch>
                             <Route path="/list" component={BeerList} />
                             <Route path="/beer/:id" component={BeerDetails} />

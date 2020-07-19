@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectBeerList, selectFavoriteList } from './beerListSlice';
 
-import BeerFilter from './beerFilter/BeerFilter';
 import Beer from './beer/Beer';
 import LoadButton from './loadButton/LoadButton';
 
@@ -20,7 +19,6 @@ const BeerList = ({ classes }) => {
     return (
         <>
             <div className={classes.root}>
-                <BeerFilter />
                 {beers}
             </div>
             <LoadButton />
