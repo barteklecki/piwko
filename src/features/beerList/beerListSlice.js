@@ -31,21 +31,6 @@ export const beerListSlice = createSlice({
         setFetchingFlag: state => {
             state.isFetching = true;
         },
-        resetBeerList: state => {
-            state.beerList = [];
-        },
-        toogleFavorite: (state, action) => {
-            const id = action.payload;
-            const index = state.favoriteList.indexOf(id);
-
-            if (index === -1) {
-                state.favoriteList.push(id);
-            } else {
-                state.favoriteList.splice(index, 1);
-            }
-
-            setLocalStorage('favList', state.favoriteList);
-        },
         errorMessage: (state, { payload }) => {
             state.isFetching = false;
             state.errorMessage = payload;
@@ -55,10 +40,7 @@ export const beerListSlice = createSlice({
 
 export const {
     fetchBeerListSuccess,
-    fetchBeer,
     setFetchingFlag,
-    resetBeerList,
-    toogleFavorite,
     errorMessage,
 } = beerListSlice.actions;
 

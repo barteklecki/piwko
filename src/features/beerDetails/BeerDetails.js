@@ -1,7 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectBeerList, selectFavoriteList, toogleFavorite } from '../beerList/beerListSlice';
+import { selectBeerList, selectFavoriteList } from '../beerList/beerListSlice';
+import { selectFavouritesIndexes, toggleFavorite } from '../favouritesList/favouritesListSlice';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -19,7 +20,7 @@ import styles from './styles';
 
 const BeerDetails = ({ classes, match }) => {
     const beers = useSelector(selectBeerList);
-    const favoriteList = useSelector(selectFavoriteList);
+    const favouritesIndexes = useSelector(selectFavouritesIndexes);
     const dispatch = useDispatch();
     const {
         params: { id },
@@ -30,7 +31,7 @@ const BeerDetails = ({ classes, match }) => {
     }
 
     const beer = beers.find(beer => +beer.id === +id);
-    const isFav = favoriteList.includes(beer.id);
+    const isFav = favouritesIndexes.includes(beer.id);
 
     const beerDetails = (
         <Card className={classes.root}>
@@ -51,7 +52,7 @@ const BeerDetails = ({ classes, match }) => {
                     {beer.tagline}
                 </Typography>
                 <IconButton
-                    onClick={() => dispatch(toogleFavorite(beer.id))}
+                    onClick={() => dispatch(toggleFavorite(beer.id))}
                     aria-label="add to favorites"
                 >
                     {isFav === true ? (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { toogleFavorite } from '../beerListSlice';
+import { toggleFavorite } from '../../favouritesList/favouritesListSlice';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -41,7 +41,7 @@ const Beer = ({ classes, beer, fav }) => {
                 <CardActions>
                     <IconButton
                         aria-label="add to favorites"
-                        onClick={() => dispatch(toogleFavorite(beer.id))}
+                        onClick={() => dispatch(toggleFavorite(beer.id))}
                     >
                         {fav === true ? <FavoriteIcon color="secondary" /> : <FavoriteBorderIcon />}
                     </IconButton>

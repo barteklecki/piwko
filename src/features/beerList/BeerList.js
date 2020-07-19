@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectBeerList, selectFavoriteList } from './beerListSlice';
+import { selectBeerList } from './beerListSlice';
+import { selectFavouritesIndexes } from '../favouritesList/favouritesListSlice';
 
 import Beer from './beer/Beer';
 import LoadButton from './loadButton/LoadButton';
@@ -10,10 +11,10 @@ import styles from './styles';
 
 const BeerList = ({ classes }) => {
     const beerList = useSelector(selectBeerList);
-    const favoriteList = useSelector(selectFavoriteList);
+    const favouritesIndexes = useSelector(selectFavouritesIndexes);
 
     const beers = beerList.map(beer => (
-        <Beer key={beer.id} beer={beer} fav={favoriteList.includes(beer.id)} />
+        <Beer key={beer.id} beer={beer} fav={favouritesIndexes.includes(beer.id)} />
     ));
 
     return (
