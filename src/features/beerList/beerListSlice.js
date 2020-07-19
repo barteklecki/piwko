@@ -83,7 +83,6 @@ export default beerListSlice.reducer;
 
 export const fetchNextPage = (listLength = 0) => async dispatch => {
     let pageNum = Math.floor( listLength / itemsPerPage) + 1;
-    console.log(pageNum)
     dispatch(setFetchingFlag());
 
     try {
