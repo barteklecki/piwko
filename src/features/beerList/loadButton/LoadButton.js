@@ -8,25 +8,14 @@ import styles from './styles';
 const LoadButton = ({ classes }) => {
     const isFetching = false;
 
-    let button = <Button className={classes.root}
-                    variant="outlined"
-                    color="default"
-                    size="large"
-                >
-                    Load more
-                </Button>
-    if (isFetching) {
-        button = <Button className={classes.root}
-                    variant="outlined"
-                    color="default"
-                    size="large"
-                    disabled
-                >
-                    Loading...
-                </Button>
-    } 
-
-    return button;
+    return <Button className={classes.root}
+                variant="outlined"
+                color="default"
+                size="large"
+                disabled={isFetching}
+            >
+                {isFetching ? 'Loading...' : 'Load more'}
+            </Button>
 };
 
 export default withStyles(styles)(LoadButton);
