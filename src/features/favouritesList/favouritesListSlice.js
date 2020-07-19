@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { apiUrl, getLocalStorage, setLocalStorage } from '../../app/config';
+import { apiUrl, itemsPerPage, getLocalStorage, setLocalStorage } from '../../app/config';
 
 export const favouritesListSlice = createSlice({
     name: 'favouritesList',
@@ -82,6 +82,11 @@ export const fetchSelectedBeers = ids => async dispatch => {
 };
 
 export const fetchInitalFavourites = dispatch => {
-    const ids = ['1','11','21'];
-    dispatch(fetchSelectedBeers(ids));
+    const favouritesIndexes = getLocalStorage('favList');
+    console.log(favouritesIndexes);
+
+    if (favouritesIndexes.length) {
+        let ids = favouritesIndexes.splice(0, itemsPerPage);
+        dispatch(fetchSelectedBeers(ids));
+    }
 }
