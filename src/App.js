@@ -15,7 +15,6 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './app/theme';
 
 import { makeStyles } from '@material-ui/core/styles';
-import './App.css';
 
 const useStyles = makeStyles(theme => ({
     root: {

@@ -6,4 +6,10 @@ export default theme => ({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    logo: {
+        width: '4rem',
+        height: '4rem',
+        borderRadius: '50%',
+        margin: theme.spacing(2),
+    },
 });
