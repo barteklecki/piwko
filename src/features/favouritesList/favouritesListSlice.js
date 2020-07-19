@@ -33,15 +33,19 @@ export const favouritesListSlice = createSlice({
         },
         removeFavorite: (state, action) => {
             const id = action.payload;
-            const index = state.favoriteList.indexOf(id);
-
-            if (index === -1) {
-                state.favoriteList.push(id);
-            } else {
+            let index = -1;
+            
+            index = state.favouritesIndexes.indexOf(id);
+            if (!index === -1) {
                 state.favoriteList.splice(index, 1);
             }
+            
+            index = state.favouritesList.indexOf(id);
+            if (!index === -1) {
+                state.favouritesList.splice(index, 1);
+            }
 
-            setLocalStorage('favList', state.favoriteList);
+            setLocalStorage('favList', state.favouritesIndexes);
         },
         errorMessage: (state, { payload }) => {
             state.isFetching = false;

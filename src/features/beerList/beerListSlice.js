@@ -1,13 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { apiUrl, itemsPerPage, getLocalStorage } from '../../app/config';
+import { apiUrl, itemsPerPage } from '../../app/config';
 
 export const beerListSlice = createSlice({
     name: 'beerList',
     initialState: {
         beerList: [],
-        favoriteList: getLocalStorage('favList') ?? [],
-        selectedBeer: null,
         isFetching: false,
         errorMessage: null,
     },
@@ -16,11 +14,6 @@ export const beerListSlice = createSlice({
             state.beerList = state.beerList.concat(action.payload);
             state.isFetching = false;
             state.errorMessage = null;
-        },
-        fetchBeer: (state, action) => {
-            //
-            console.log('fetchBeer:', action.payload);
-            state.isFetching = false;
         },
         setFetchingFlag: state => {
             state.isFetching = true;
@@ -40,20 +33,7 @@ export const {
 
 export const selectBeerList = state => state.beerList.beerList;
 export const selectBeerListLength = state => state.beerList.beerList.length;
-export const selectFavoriteList = state => state.beerList.favoriteList;
 export const selectFetchingFlag = state => state.beerList.isFetching;
-
-export const selectBeer = state => {
-    const beer = state.beerList.beerList.filter(
-        beer => beer.id === state.beerList.selectedBeer
-    );
-    return beer.length ? beer : null;
-};
-
-export const selectBeerById = (state, id) => {
-    const beer = state.beerList.beerList.filter(beer => beer.id === id);
-    return beer.length ? beer : null;
-};
 
 export default beerListSlice.reducer;
 
