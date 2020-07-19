@@ -63,7 +63,11 @@ export const {
 } = beerListSlice.actions;
 
 export const selectBeerList = state => state.beerList.beerList;
+export const selectBeerListLength = state => state.beerList.beerList.length;
 export const selectFavoriteList = state => state.beerList.favoriteList;
+export const selectFetchingFlag = state => state.beerList.isFetching;
+
+
 
 export const selectBeer = state => {
     const beer = state.beerList.beerList.filter(
@@ -79,8 +83,8 @@ export const selectBeerById = (state, id) => {
 
 export default beerListSlice.reducer;
 
-export const fetchNextPage = (list = []) => async dispatch => {
-    let pageNum = Math.floor( list.length / itemsPerPage) + 1;
+export const fetchNextPage = (listLength = 0) => async dispatch => {
+    let pageNum = Math.floor( listLength / itemsPerPage) + 1;
 
     dispatch(setFetchingFlag());
 
