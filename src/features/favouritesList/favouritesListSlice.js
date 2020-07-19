@@ -12,9 +12,9 @@ export const favouritesListSlice = createSlice({
     },
     reducers: {
         fetchSelectedBeersSuccess: (state, action) => {
-            //
-            console.log('fetchBeer:', action.payload);
+            state.favouritesList = state.favouritesList.concat(action.payload);
             state.isFetching = false;
+            state.errorMessage = null;
         },
         setFetchingFlag: state => {
             state.isFetching = true;

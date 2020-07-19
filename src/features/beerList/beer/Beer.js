@@ -20,8 +20,6 @@ const Beer = ({ classes, beer, fav }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    console.log(fav)
-
     const clickBeerHandler = () => {
         history.push(`beer/${beer.id}`);
     };
