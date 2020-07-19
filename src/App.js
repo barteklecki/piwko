@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchPageFromApi } from './features/beerList/beerListSlice';
+import { fetchNextPage } from './features/beerList/beerListSlice';
 
 import BeerList from './features/beerList/BeerList';
 import BeerDetails from './features/beerDetails/BeerDetails';
@@ -33,7 +33,7 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchPageFromApi());
+        dispatch(fetchNextPage());
     }, [dispatch]);
 
     return (

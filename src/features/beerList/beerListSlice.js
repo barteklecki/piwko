@@ -79,9 +79,11 @@ export const selectBeerById = (state, id) => {
 
 export default beerListSlice.reducer;
 
-export const fetchPageFromApi = () => async dispatch => {
-    let pageNum = Math.floor(0 / itemsPerPage) + 1;
+export const fetchNextPage = (list = []) => async dispatch => {
+    let pageNum = Math.floor( list.length / itemsPerPage) + 1;
+
     dispatch(setFetchingFlag());
+
     try {
         const url = `${API_URL}?page=${pageNum}&per_page=${itemsPerPage}`;
         const response = await axios.get(url);
