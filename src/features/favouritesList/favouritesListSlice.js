@@ -80,3 +80,8 @@ export const fetchSelectedBeers = ids => async dispatch => {
         console.log(error);
     }
 };
+
+export const fetchInitalFavourites = dispatch => {
+    const ids = ['1','11','21'];
+    dispatch(fetchSelectedBeers(ids));
+}

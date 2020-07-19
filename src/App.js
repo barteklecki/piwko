@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchNextPage } from './features/beerList/beerListSlice';
+import { fetchInitalFavourites } from './features/favouritesList/favouritesListSlice';
 
 import Header from './features/header/Header';
 import BeerList from './features/beerList/BeerList';
@@ -35,6 +36,7 @@ const App = () => {
 
     useEffect(() => {
         dispatch(fetchNextPage());
+        dispatch(fetchInitalFavourites);
     }, [dispatch]);
 
     return (
