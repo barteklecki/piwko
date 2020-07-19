@@ -4,6 +4,7 @@ import { selectBeerList, selectFavoriteList } from './beerListSlice';
 
 import BeerFilter from './beerFilter/BeerFilter';
 import Beer from './beer/Beer';
+import LoadButton from './loadButton/LoadButton';
 
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
@@ -17,10 +18,13 @@ const BeerList = ({ classes }) => {
     ));
 
     return (
-        <div className={classes.root}>
-            <BeerFilter />
-            {beers}
-        </div>
+        <>
+            <div className={classes.root}>
+                <BeerFilter />
+                {beers}
+            </div>
+            <LoadButton />
+        </>
     );
 };
 
