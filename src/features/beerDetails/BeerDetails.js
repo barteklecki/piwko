@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectBeerList, selectFavoriteList } from '../beerList/beerListSlice';
+import { selectBeerList } from '../beerList/beerListSlice';
 import { selectFavouritesIndexes, toggleFavorite } from '../favouritesList/favouritesListSlice';
 
 import Card from '@material-ui/core/Card';

@@ -1,12 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-const setLocalStorage = (key, arr) =>
-    window.localStorage.setItem(key, JSON.stringify(arr));
-const getLocalStorage = key => JSON.parse(window.localStorage.getItem(key));
-
-const itemsPerPage = 12;
-const API_URL = 'https://api.punkapi.com/v2/beers';
+import { apiUrl, itemsPerPage, getLocalStorage, setLocalStorage } from '../../app/config';
 
 export const favouritesListSlice = createSlice({
     name: 'favouritesList',
@@ -75,7 +69,7 @@ export const fetchNextPage = (listLength = 0) => async dispatch => {
     dispatch(setFetchingFlag());
 
     try {
-        const url = `${API_URL}?page=${pageNum}&per_page=${itemsPerPage}`;
+        const url = `${apiUrl}?page=${pageNum}&per_page=${itemsPerPage}`;
         const response = await axios.get(url);
         const data = response.data;
         //dispatch(fetchBeerListSuccess(data));
