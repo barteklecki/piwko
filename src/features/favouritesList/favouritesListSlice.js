@@ -19,15 +19,13 @@ export const favouritesListSlice = createSlice({
         setFetchingFlag: state => {
             state.isFetching = true;
         },
-        toggleFavorite: (state, action) => {
+        addFavorite: (state, action) => {
             const id = action.payload;
             const index = state.favouritesIndexes.indexOf(id);
 
             if (index === -1) {
                 state.favouritesIndexes.push(id);
-            } else {
-                state.favouritesIndexes.splice(index, 1);
-            }
+            } 
 
             setLocalStorage('favList', state.favouritesIndexes);
         },
@@ -36,12 +34,12 @@ export const favouritesListSlice = createSlice({
             let index = -1;
 
             index = state.favouritesIndexes.indexOf(id);
-            if (!index === -1) {
-                state.favoriteList.splice(index, 1);
+            if (index !== -1) {
+                state.favouritesIndexes.splice(index, 1);
             }
 
             index = state.favouritesList.indexOf(id);
-            if (!index === -1) {
+            if (index !== -1) {
                 state.favouritesList.splice(index, 1);
             }
 
@@ -57,7 +55,7 @@ export const favouritesListSlice = createSlice({
 export const {
     fetchSelectedBeersSuccess,
     setFetchingFlag,
-    toggleFavorite,
+    addFavorite,
     removeFavorite,
     errorMessage,
 } = favouritesListSlice.actions;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectBeerList } from '../beerList/beerListSlice';
-import { selectFavouritesIndexes, toggleFavorite } from '../favouritesList/favouritesListSlice';
+import { selectFavouritesIndexes, addFavorite, removeFavorite } from '../favouritesList/favouritesListSlice';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -33,6 +33,21 @@ const BeerDetails = ({ classes, match }) => {
     const beer = beers.find(beer => +beer.id === +id);
     const isFav = favouritesIndexes.includes(beer.id);
 
+    let favButton = <IconButton
+                        aria-label="add to favorites"
+                        onClick={() => dispatch(addFavorite(beer.id))}
+                    >
+                        <FavoriteBorderIcon />
+                    </IconButton>
+    if(isFav) {
+        favButton = <IconButton
+                        aria-label="remove from favorites"
+                        onClick={() => dispatch(removeFavorite(beer.id))}
+                    >
+                            <FavoriteIcon color="secondary" />
+                    </IconButton>
+    }
+
     const beerDetails = (
         <Card className={classes.root}>
             <CardContent className={classes.summary}>
@@ -51,16 +66,7 @@ const BeerDetails = ({ classes, match }) => {
                 >
                     {beer.tagline}
                 </Typography>
-                <IconButton
-                    onClick={() => dispatch(toggleFavorite(beer.id))}
-                    aria-label="add to favorites"
-                >
-                    {isFav === true ? (
-                        <FavoriteIcon color="secondary" />
-                    ) : (
-                        <FavoriteBorderIcon />
-                    )}
-                </IconButton>
+                {favButton}
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { toggleFavorite } from '../../favouritesList/favouritesListSlice';
+import { addFavorite, removeFavorite } from '../../favouritesList/favouritesListSlice';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -20,9 +20,26 @@ const Beer = ({ classes, beer, fav }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    console.log(fav)
+
     const clickBeerHandler = () => {
         history.push(`beer/${beer.id}`);
     };
+
+    let favButton = <IconButton
+                        aria-label="add to favorites"
+                        onClick={() => dispatch(addFavorite(beer.id))}
+                    >
+                        <FavoriteBorderIcon />
+                    </IconButton>
+    if(fav) {
+        favButton = <IconButton
+                        aria-label="remove from favorites"
+                        onClick={() => dispatch(removeFavorite(beer.id))}
+                        >
+                            <FavoriteIcon color="secondary" />
+                    </IconButton>
+    }
 
     return (
         <Card className={classes.root}>
@@ -39,12 +56,7 @@ const Beer = ({ classes, beer, fav }) => {
                     </Typography>
                 </div>
                 <CardActions>
-                    <IconButton
-                        aria-label="add to favorites"
-                        onClick={() => dispatch(toggleFavorite(beer.id))}
-                    >
-                        {fav === true ? <FavoriteIcon color="secondary" /> : <FavoriteBorderIcon />}
-                    </IconButton>
+                    {favButton}
                     <IconButton aria-label="share">
                         <ShareIcon />
                     </IconButton>
