@@ -19,7 +19,7 @@ const FavouritesList = ({ classes }) => {
     return (
         <>
             <div className={classes.root}>
-                FAV{beers}
+                {beers}
             </div>
             <LoadButton />
         </>
