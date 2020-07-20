@@ -84,7 +84,7 @@ export const fetchSelectedBeers = ids => async dispatch => {
 export const fetchInitalFavourites = dispatch => {
     const favouritesIndexes = getLocalStorage('favList');
 
-    if (favouritesIndexes.length) {
+    if (favouritesIndexes && favouritesIndexes.length) {
         let ids = favouritesIndexes.splice(0, itemsPerPage);
         dispatch(fetchSelectedBeers(ids));
     }

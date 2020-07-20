@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectBeerList } from '../beerList/beerListSlice';
-import { selectFavouritesIndexes, addFavorite, removeFavorite } from '../favouritesList/favouritesListSlice';
+import { selectFavouritesIndexes, selectFavouritesList, addFavorite, removeFavorite } from '../favouritesList/favouritesListSlice';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -20,6 +20,7 @@ import styles from './styles';
 
 const BeerDetails = ({ classes, match }) => {
     const beers = useSelector(selectBeerList);
+    const favouriteBeers = useSelector(selectFavouritesList);
     const favouritesIndexes = useSelector(selectFavouritesIndexes);
     const dispatch = useDispatch();
     const {
@@ -30,7 +31,11 @@ const BeerDetails = ({ classes, match }) => {
         return <Redirect to="/" />;
     }
 
-    const beer = beers.find(beer => +beer.id === +id);
+    let beer = beers.find(beer => +beer.id === +id);
+    if(!beer) {
+        beer = favouriteBeers.find(beer => +beer.id === +id);
+    }
+
     const isFav = favouritesIndexes.includes(beer.id);
 
     let favButton = <IconButton
