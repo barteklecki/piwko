@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFavouritesList, selectFavouritesIndexes, fetchSelectedBeers } from './favouritesListSlice';
+import {
+    selectFavouritesList,
+    selectFavouritesIndexes,
+    fetchSelectedBeers,
+} from './favouritesListSlice';
 
 import Beer from '../beerList/beer/Beer';
+import Typography from '@material-ui/core/Typography';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
@@ -16,15 +22,32 @@ const FavouritesList = ({ classes }) => {
         dispatch(fetchSelectedBeers(favouritesIndexes));
     }, [dispatch, favouritesIndexes]);
 
-    const beers = favouritesList.map(beer => (
-        <Beer key={beer.id} beer={beer} fav={favouritesIndexes.includes(beer.id)} />
+    let beers = favouritesList.map(beer => (
+        <Beer
+            key={beer.id}
+            beer={beer}
+            fav={favouritesIndexes.includes(beer.id)}
+        />
     ));
-
-    return (
-            <div className={classes.root}>
-                {beers}
+    
+    if (!beers.length) {
+        beers = (
+            <div className={classes.empty}>
+                <Typography component="h4" variant="h4" aria-label="title">
+                    Empty!
+                </Typography>
+                <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                >
+                    Add beers from catalogue to favourites!
+                </Typography>
+                <FavoriteIcon color="secondary" fontSize="large" />
             </div>
-    );
+        );
+    }
+
+    return <div className={classes.root}>{beers}</div>;
 };
 
 export default withStyles(styles)(FavouritesList);

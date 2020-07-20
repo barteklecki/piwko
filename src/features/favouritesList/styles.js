@@ -7,4 +7,12 @@ export default theme => ({
         gridAutoRows: 'minmax(300px, auto)',
         gridAutoColumns: 'minmax(300px, auto)', 
     },
+    empty: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gridColumn: '1 / -1',
+        
+    }
 });
