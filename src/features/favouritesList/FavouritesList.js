@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
     selectFavouritesList,
     selectFavouritesIndexes,
+    selectFetchingFlag,
     fetchSelectedBeers,
 } from './favouritesListSlice';
 
@@ -16,6 +17,7 @@ import styles from './styles';
 const FavouritesList = ({ classes }) => {
     const favouritesList = useSelector(selectFavouritesList);
     const favouritesIndexes = useSelector(selectFavouritesIndexes);
+    const isFetching = useSelector(selectFetchingFlag);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -31,20 +33,38 @@ const FavouritesList = ({ classes }) => {
     ));
     
     if (!beers.length) {
-        beers = (
-            <div className={classes.empty}>
-                <Typography component="h4" variant="h4" aria-label="title">
-                    Empty!
-                </Typography>
-                <Typography
-                    variant="subtitle1"
-                    color="textSecondary"
-                >
-                    Add beers from catalogue to favourites!
-                </Typography>
-                <FavoriteIcon color="secondary" fontSize="large" />
-            </div>
-        );
+        if (isFetching) {
+            beers = (
+                <div className={classes.empty}>
+                    <Typography component="h4" variant="h4" aria-label="title">
+                        Loading...
+                    </Typography>
+                    <Typography
+                        variant="subtitle1"
+                        color="textSecondary"
+                    >
+                        Plese, wait for items to be loaded.
+                    </Typography>
+                    <FavoriteIcon color="secondary" fontSize="large" />
+                </div>
+            );
+        } else {
+            beers = (
+                <div className={classes.empty}>
+                    <Typography component="h4" variant="h4" aria-label="title">
+                        Empty!
+                    </Typography>
+                    <Typography
+                        variant="subtitle1"
+                        color="textSecondary"
+                    >
+                        Add beers from catalogue to favourites!
+                    </Typography>
+                    <FavoriteIcon color="secondary" fontSize="large" />
+                </div>
+            );
+        }
+        
     }
 
     return <div className={classes.root}>{beers}</div>;
