@@ -12,7 +12,7 @@ export const favouritesListSlice = createSlice({
     },
     reducers: {
         fetchSelectedBeersSuccess: (state, action) => {
-            state.favouritesList = state.favouritesList.concat(action.payload);
+            state.favouritesList = action.payload;
             state.isFetching = false;
             state.errorMessage = null;
         },
@@ -33,14 +33,14 @@ export const favouritesListSlice = createSlice({
             const id = action.payload;
             let index = -1;
 
+            index = state.favouritesList.map( el => el.id ).indexOf(id);
+            if (index !== -1) {
+                state.favouritesList.splice(index, 1);
+            }
+
             index = state.favouritesIndexes.indexOf(id);
             if (index !== -1) {
                 state.favouritesIndexes.splice(index, 1);
-            }
-
-            index = state.favouritesList.indexOf(id);
-            if (index !== -1) {
-                state.favouritesList.splice(index, 1);
             }
 
             setLocalStorage('favList', state.favouritesIndexes);
@@ -83,7 +83,6 @@ export const fetchSelectedBeers = ids => async dispatch => {
 
 export const fetchInitalFavourites = dispatch => {
     const favouritesIndexes = getLocalStorage('favList');
-    console.log(favouritesIndexes);
 
     if (favouritesIndexes.length) {
         let ids = favouritesIndexes.splice(0, itemsPerPage);
