@@ -1,6 +1,7 @@
 export default theme => ({
     root: {
         display: 'flex',
+        justifyContent: 'space-between',
         padding: theme.spacing(2),
     },
     details: {
