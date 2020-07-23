@@ -2,14 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { apiUrl, itemsPerPage, getLocalStorage, setLocalStorage } from '../../app/config';
 
-export const favouritesListSlice = createSlice({
-    name: 'favouritesList',
-    initialState: {
+export const initialState = {
         favouritesList: [],
         favouritesIndexes: getLocalStorage('favList') ?? [],
         isFetching: false,
         errorMessage: null,
-    },
+    }
+
+export const favouritesListSlice = createSlice({
+    name: 'favouritesList',
+    initialState,
     reducers: {
         fetchSelectedBeersSuccess: (state, action) => {
             state.favouritesList = action.payload;
@@ -63,6 +65,7 @@ export const {
 export const selectFavouritesList = state => state.favouritesList.favouritesList;
 export const selectFavouritesIndexes = state => state.favouritesList.favouritesIndexes;
 export const selectFetchingFlag = state => state.favouritesList.isFetching;
+export const selectErrorMessage = state => state.favouritesList.errorMessage;
 
 export default favouritesListSlice.reducer;
 
